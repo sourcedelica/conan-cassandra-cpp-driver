@@ -1,13 +1,44 @@
-# [Conan](http://conan.io) recipe for Cassandra C/C++ driver
+# [Conan](http://conan.io) recipe for [Cassandra C/C++ driver](https://github.com/datastax/cpp-driver)
 
-## Setup
+## Usage
 
-### Conan
+Add a requirement for `cassandra-cpp-driver/version@sourcedelica/testing`
+to your `conanfile.txt` or `conanfile.py`.
+
+Check `conanfile.py` in this repo for the _version_.  It is
+the first attribute in the class definition:
+```
+class CassandraCppDriverConan(ConanFile):
+    version = '2.5.0'
+```
+
+## Build Options
+
+Supported options are:
+
+|Option     |Values                             |Default  |Description             |
+|:----------|:----------------------------------|:--------|:-----------------------|
+|`shared`   |`True`, `False`                    | `False` | Build shared libraries (static always built) |
+
+For example, to build with shared libraries use:
+```
+conan test_package -o cassandra-cpp-driver:shared=True 
+```
+
+TODO: The Cassandra build always builds the shared libs even if `shared=False`.
+
+Conan keeps track of the option values used and each built combination of
+options is a different package.
+
+## Development
+
+### Installing Conan
+Conan is required to build the package.  To install Conan:
 ```
 pip install conan
 ```
 
-## Building a new version of the package
+### Building a package for the new version of the driver
 
 1. Edit `conanfile.py` and `test_package/conanfile.py` and change the
    `version` attribute to the new version number.
@@ -20,25 +51,9 @@ conan test_package [-o cassandra-cpp-driver:option=value]...
 
 `conan test_package` will build the driver and install the package in your local 
 Conan repository under `~/.conan/data`.  It will also run a smoke test 
-against the package (TODO).
+against the package.
 
-### Build Options
-
-Supported options are:
- 
-|Option     |Values                             |Default  |Description             | 
-|:----------|:----------------------------------|:--------|:-----------------------|
-|`shared`   |`True`, `False`                    | `False` | Build shared libraries (static always built) |
-
-For example, to build with shared libraries use:
-```
-conan test_package -o cassandra-cpp-driver:shared=True 
-```
-
-Conan keeps track of the option values used and each built combination of
-options is a different package.
-
-## Uploading built packages to `conan.io`
+### Uploading built packages to `conan.io`
 ```
 conan upload --all cassandra-cpp-driver/version@user/channel
 ```
