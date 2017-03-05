@@ -31,7 +31,7 @@ class CassandraCppDriverConan(ConanFile):
         if not os.path.isdir(self.build_dir):
             os.makedirs(self.build_dir)
         cmake = CMake(self.settings)
-        cmake.configure(self, vars=defs, source_dir="..", build_dir=self.build_dir)
+        cmake.configure(self, defs=defs, source_dir="..", build_dir=self.build_dir)
         cmake.build(self)
 
     def run_command(self, cmd, cwd=None):
