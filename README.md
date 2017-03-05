@@ -12,24 +12,6 @@ class CassandraCppDriverConan(ConanFile):
     version = '2.5.0'
 ```
 
-## Build Options
-
-Supported options are:
-
-|Option     |Values                             |Default  |Description             |
-|:----------|:----------------------------------|:--------|:-----------------------|
-|`shared`   |`True`, `False`                    | `False` | Build shared libraries (static always built) |
-
-For example, to build with shared libraries use:
-```
-conan test_package -o cassandra-cpp-driver:shared=True 
-```
-
-TODO: The Cassandra build always builds the shared libs even if `shared=False`.
-
-Conan keeps track of the option values used and each built combination of
-options is a different package.
-
 ## Development
 
 ### Installing Conan

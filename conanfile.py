@@ -10,8 +10,6 @@ class CassandraCppDriverConan(ConanFile):
     url = "https://github.com/sourcedelica/conan-cassandra-cpp-driver"
     license = "Apache-2.0"
     settings = "os", "compiler", "build_type", "arch"
-    options = {"shared": [True, False]}
-    default_options = "shared=False"
     requires = "LibUV/1.9.1@cloudwall/stable", "OpenSSL/1.0.2i@lasote/stable"
     description = "Cassandra C/C++ driver"
     source_dir = "cpp-driver"
@@ -23,8 +21,6 @@ class CassandraCppDriverConan(ConanFile):
 
     def build(self):
         defs = {
-            "CASS_BUILD_STATIC": "ON",
-            "CASS_BUILD_SHARED": "ON" if self.options.shared else "OFF",
                "LIBUV_ROOT_DIR": self.deps_cpp_info["LibUV"].rootpath,
              "OPENSSL_ROOT_DIR": self.deps_cpp_info["OpenSSL"].rootpath
         }
